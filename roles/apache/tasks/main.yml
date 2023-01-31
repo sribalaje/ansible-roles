@@ -1,0 +1,11 @@
+---
+# tasks file for /etc/ansible/roles/apache
+  - name: Install Webserver
+    apt: name=apache2 state=latest
+  - name: Copy the config file
+    template: src=/etc/ansible/roles/apache/files/sri dest=/tmp/sri
+    notify:
+    - restartapache
+  - name: enable httpd services
+    service: name=apache2 state=started enabled=yes
+
